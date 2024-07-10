@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import Post from "../models/Post";
-import { handleFileUpload } from "../utils/file-upload";
+import Post from "../models/Post.js";
+import { handleFileUpload } from "../utils/file-upload.js";
 
 import multer from "multer";
 

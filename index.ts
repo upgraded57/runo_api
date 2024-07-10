@@ -3,9 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
 import mongoose from "mongoose";
-import authRoute from "./routes/auth";
-import userRoute from "./routes/users";
-import postRoute from "./routes/posts";
+import authRoute from "./routes/auth.js";
+import userRoute from "./routes/users.js";
+import postRoute from "./routes/posts.js";
 import path from "path";
 
 // Initialize app

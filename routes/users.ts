@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-const User = require("../models/User");
-const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
+import User from "../models/User.js";
+import Post from "../models/Post.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -34,6 +34,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
   if (req.body.userId === req.params.id) {
     try {
       const user = await User.findById(req.params.id);
+      if (!user) return res.status(400).json({ message: "Cannot find post" });
       try {
         await Post.deleteMany({ username: user.username });
         await User.findByIdAndDelete(req.params.id);
@@ -53,8 +54,11 @@ router.delete("/:id", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.id);
-    const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    if (!user) return res.status(400).json({ message: "Cannot find post" });
+    // Convert Mongoose document to plain JavaScript object
+    const userObject = user.toObject();
+    const { password: newuserPassword, ...others } = userObject;
+    res.status(200).json({ user: others });
   } catch (err) {
     res.status(500).json(err);
   }
