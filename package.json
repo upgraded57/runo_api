@@ -5,7 +5,10 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts"
+    "dev": "nodemon index.ts",
+    "start": "",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
   },
   "keywords": [],
   "author": "",
